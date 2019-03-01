@@ -139,7 +139,7 @@ public class MelodicVoice {
     }
     
     public Integer getLatestPitch() {
-        for (int i = note_arraylist.size()-1; i>0; i--) {
+        for (int i = note_arraylist.size()-1; i>=0; i--) {
             MelodicNote myNote = note_arraylist.get(i);
             if (!myNote.getRest()) return myNote.getPitch();
             break;
@@ -158,7 +158,7 @@ public class MelodicVoice {
             }
             if (count == 2) break;
         }
-        if (count == 2) return interval_notes.get(1) - interval_notes.get(0);
+        if (count == 2) return interval_notes.get(0) - interval_notes.get(1);
         else return null;
     }
     

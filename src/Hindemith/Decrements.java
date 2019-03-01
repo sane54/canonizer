@@ -24,18 +24,18 @@ package Hindemith;
  */
 public class Decrements {
     static int peak_trough_quota_exceed = 1;
-    static int melodic_motion_quota_exceed = 1;
+    static int melodic_motion_quota_exceed = 10;
     static int successive_leaps = 1;
     static int bad_motion_after_leap = 1;
-    static int outside_range  = 1;
-    static int remote_from_pitchcenter = 1;
-    static int illegal_note  = 500000;
+    static int outside_range  = 1000;
+    static int remote_from_pitchcenter = 1000;
+    static int illegal_note  = 10000000;
     static int overlap = 1;
-    static int accented_dissonance = 1;
-    static int bad_diss_approach_from_cons = 1;
-    static int bad_cons_approach_from_diss = 1;
-    static int motion_into_diss_both_voices_change = 1;
-    static int seq_of_diss = 1;
+    static int accented_dissonance = 100;
+    static int bad_diss_approach_from_cons = 0;
+    static int bad_cons_approach_from_diss = 10;
+    static int motion_into_diss_both_voices_change = 1000;
+    static int seq_of_diss = 1100;
     static int seq_same_type_diss = 1;
     static int parallel_dissonance = 1;
     static int parallel_perf_consonance = 1;
@@ -48,11 +48,14 @@ public class Decrements {
     static int is_not_tonic = 1;
     static int direct_motion_into_diss = 1;
     static int dissonant_with_root = 1;
-    static int minor_9th = 1;
+    static int minor_9th = 100;
+    static int severe_dissonance = 5000;
     static int octave = 1;
     static int dissonance = 1;
-    static int improbable_melodic_motion = 100;
-    static int impossible_melodic_motion = 500;
+    static int improbable_melodic_motion = 1000;
+    static int impossible_melodic_motion = 100000;
+    static int accented_severe_dissonance = 5000;
+    static int overlapping_voices = 10;
     
  public static void setPeak_Trough_Quota_Exceed (int my_ptqe){
     peak_trough_quota_exceed = my_ptqe;

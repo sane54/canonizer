@@ -8,6 +8,7 @@ package Hindemith;
 import Hindemith.ModeModules.Clydian_keyChange;
 import Hindemith.ModeModules.ModeModule;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import org.jfugue.Pattern;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -436,7 +437,10 @@ public class ModelIncubatorTest {
         System.out.println();
 
         ArrayList<PitchCandidate> expResult = null;
-        ArrayList<PitchCandidate> result = ModelIncubator.melodicCheck(pitch_candidates, my_mode_module, voice_pitch_count, previous_melody_pitch, previous_melodic_interval);
+        for (PitchCandidate myPC : pitch_candidates) {
+            PitchCandidate result = ModelIncubator.melodicCheck(myPC, my_mode_module, voice_pitch_count, previous_melody_pitch, previous_melodic_interval);    
+        }
+        
         //assertEquals(expResult, result);
     }
 
@@ -463,19 +467,160 @@ public class ModelIncubatorTest {
     @Test
     public void testHarmonicChecks() {
         System.out.println("harmonicChecks");
-        ArrayList<PitchCandidate> pitch_candidates = null;
+        PitchCandidate myPC = null;
         MelodicNote CF_note = null;
-        Integer previous_cf_pitch = null;
+        Integer previous_pitch_cf = null;
         Integer previous_melody_pitch = null;
         MelodicNote fragment_note = null;
         int canon_transpose_interval = 0;
-        ArrayList<PitchCandidate> expResult = null;
-        ArrayList<PitchCandidate> result = ModelIncubator.harmonicChecks(pitch_candidates, CF_note, previous_cf_pitch, previous_melody_pitch, fragment_note, canon_transpose_interval);
-        assertEquals(expResult, result);
-        //consonant with CF
-        //CF rest - consonant w previous cf
-        
+        PitchCandidate expResult = null;
+        //PitchCandidate result = ModelIncubator.harmonicChecks(myPC, CF_note, previous_pitch_cf, previous_melody_pitch, fragment_note, canon_transpose_interval);
+        //assertEquals(expResult, result);
         // TODO review the generated test code and remove the default call to fail.
         fail("The test case is a prototype.");
     }
+
+    /**
+     * Test of buildFragmentPitches method, of class ModelIncubator.
+     */
+    @Test
+    public void testBuildFragmentPitches() {
+        System.out.println("buildFragmentPitches");
+        MelodicVoice alter_me = null;
+        int number_of_voices = 0;
+        ModeModule my_mode_module = null;
+        MelodicVoice expResult = null;
+        MelodicVoice result = ModelIncubator.buildFragmentPitches(alter_me, number_of_voices, my_mode_module);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of pickWinner method, of class ModelIncubator.
+     */
+    @Test
+    public void testPickWinner() {
+        System.out.println("pickWinner");
+        ArrayList<PitchCandidate> pitch_candidates = null;
+        PitchCandidate expResult = null;
+        PitchCandidate result = ModelIncubator.pickWinner(pitch_candidates);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createbuilt_voice_queues method, of class ModelIncubator.
+     */
+    @Test
+    public void testCreatebuilt_voice_queues() {
+        System.out.println("createbuilt_voice_queues");
+        ArrayList<LinkedList> expResult = null;
+        ArrayList<LinkedList> result = ModelIncubator.createbuilt_voice_queues();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of calcPeaksTroughs method, of class ModelIncubator.
+     */
+    @Test
+    public void testCalcPeaksTroughs() {
+        System.out.println("calcPeaksTroughs");
+        PitchCandidate pitch_winner = null;
+        ModelIncubator.calcPeaksTroughs(pitch_winner);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of calculate_canon_transpose_interval method, of class ModelIncubator.
+     */
+    @Test
+    public void testCalculate_canon_transpose_interval() {
+        System.out.println("calculate_canon_transpose_interval");
+        Integer vector_shift = 1;
+        Integer b = null;
+        Integer number_of_voices = 3;
+        int[] transpose_interval_array = null;
+        Integer expResult = null;
+        Integer result = ModelIncubator.calculate_canon_transpose_interval(vector_shift, b, number_of_voices, transpose_interval_array);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getEffectiveDuration method, of class ModelIncubator.
+     */
+    @Test
+    public void testGetEffectiveDuration() {
+        System.out.println("getEffectiveDuration");
+        MelodicVoice alter_me = null;
+        MelodicNote fragment_note = null;
+        int fragindex = 0;
+        Double expResult = null;
+        Double result = ModelIncubator.getEffectiveDuration(alter_me, fragment_note, fragindex);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createHoldoverCFArray method, of class ModelIncubator.
+     */
+    @Test
+    public void testCreateHoldoverCFArray() {
+        System.out.println("createHoldoverCFArray");
+        int size = 0;
+        ArrayList<MelodicNote> expResult = null;
+        ArrayList<MelodicNote> result = ModelIncubator.createHoldoverCFArray(size);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createPreviousCFPitchArray method, of class ModelIncubator.
+     */
+    @Test
+    public void testCreatePreviousCFPitchArray() {
+        System.out.println("createPreviousCFPitchArray");
+        int size = 0;
+        ArrayList<MelodicNote> expResult = null;
+        ArrayList<MelodicNote> result = ModelIncubator.createPreviousCFPitchArray(size);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getKeyTranspose method, of class ModelIncubator.
+     */
+    @Test
+    public void testGetKeyTranspose() {
+        System.out.println("getKeyTranspose");
+        LinkedList<MelodicNote> chord_prog_stack = null;
+        MelodicNote fragment_note = null;
+        Integer expResult = null;
+        Integer result = ModelIncubator.getKeyTranspose(chord_prog_stack, fragment_note);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of resetParams method, of class ModelIncubator.
+     */
+    @Test
+    public void testResetParams() {
+        System.out.println("resetParams");
+        ModelIncubator instance = new ModelIncubator();
+        instance.resetParams();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
 }
