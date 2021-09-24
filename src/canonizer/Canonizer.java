@@ -6,7 +6,8 @@
 package canonizer;
 import Hindemith.CanonizerModalTransposeModel;
 import Hindemith.CanonizerModel;
-
+import Hindemith.MidiOut;
+import Hindemith.ModelIncubator;
 import Hindemith.Model_1;
 /**
  *
@@ -18,7 +19,9 @@ public class Canonizer {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        CanonizerModalTransposeModel mymodel = new CanonizerModalTransposeModel();
+        MidiOut.setDevice();
+        ModelIncubator mymodel = new ModelIncubator();
+        //CanonizerModalTransposeModel mymodel = new CanonizerModalTransposeModel();
         //CanonizerModel mymodel = new CanonizerModel();
         //Model_1 mymodel = new Model_1();
     }

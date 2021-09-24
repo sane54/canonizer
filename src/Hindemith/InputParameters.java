@@ -37,14 +37,14 @@ import java.io.File;
 public class InputParameters {
 static Boolean out_to_midi_yoke = false;
 static Boolean q_mode = false;
-static Integer [] consonances = {0, 3, 4, 7, 8, 9};
-static Integer [] perfect_consonances = {0, 7};
+static Integer [] consonances = {0, 3, 4, 5, 7, 8, 9};
+static Integer [] perfect_consonances = {0, 5, 7};
 static Integer [] root_consonances = {0, 3, 4, 7};
-static int tempo_bpm = 100;
-static int piece_length = 2;
+static int tempo_bpm = 250;
+static int piece_length = 3; //original was 2
 static int root_key = 0;
 static ModeModule my_mode_module = new Clydian_keyChange();
-static String [] voice_array = {"bass", "tenor"};  
+static String [] voice_array = {"bass", "bass", "bass"};  
 static RhythmModule james = new CommonTimeSuperStraightPatternGenerator();
 static boolean large_dissonance_bad = true;
 static File filePath = null;
@@ -52,10 +52,11 @@ static File queueDir = null;
 static File fileDir = null;
 static String queue_directory = null;
 static Integer transpose_interval = 0;
-static int loops = 3;
-static int [] transpose_interval_array = {5, 12};
-static int sample_size = 5;
-static byte [] instbyte = { 70, 70 };
+static int loops = 8; //always keep minimum of 4
+//first element of transpose_interval_array is always 0
+static int [] transpose_interval_array = {0,3,4};//9,4,7 is good {0,7,12}
+static int sample_size = 3; //reduce?
+static byte [] instbyte = { 46, 46, 46};
 
 public static Boolean get_out_to_midi_yoke () {
     return out_to_midi_yoke;

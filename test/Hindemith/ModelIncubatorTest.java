@@ -8,6 +8,7 @@ package Hindemith;
 import Hindemith.ModeModules.Clydian_keyChange;
 import Hindemith.ModeModules.ModeModule;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import org.jfugue.Pattern;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -38,6 +39,7 @@ public class ModelIncubatorTest {
     
     @Before
     public void setUp() {
+
     }
     
     @After
@@ -436,7 +438,468 @@ public class ModelIncubatorTest {
         System.out.println();
 
         ArrayList<PitchCandidate> expResult = null;
-        ArrayList<PitchCandidate> result = ModelIncubator.melodicCheck(pitch_candidates, my_mode_module, voice_pitch_count, previous_melody_pitch, previous_melodic_interval);
+        for (PitchCandidate myPC : pitch_candidates) {
+            PitchCandidate result = ModelIncubator.melodicCheck(myPC, my_mode_module, voice_pitch_count, previous_melody_pitch, previous_melodic_interval);    
+        }
+        
         //assertEquals(expResult, result);
+    }
+
+    /**
+     * Test of setPeakTroughPitchCount method, of class ModelIncubator.
+     */
+    @Test
+    public void testSetPeakTroughPitchCount() {
+        System.out.println("setPeakTroughPitchCount");
+        int test_peak = 0;
+        int test_peak_count = 0;
+        int test_trough = 0;
+        int test_trough_count = 0;
+        ArrayList<PitchCount> test_pitch_counts = null;
+        ArrayList<MotionCount> test_motion_counts = null;
+        ModelIncubator.setPeakTroughPitchCount(test_peak, test_peak_count, test_trough, test_trough_count, test_pitch_counts, test_motion_counts);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of harmonicChecks method, of class ModelIncubator.
+     */
+    @Test
+    public void testHarmonicChecks() {
+        System.out.println("harmonicChecks");
+        PitchCandidate myPC = null;
+        MelodicNote CF_note = null;
+        Integer previous_pitch_cf = null;
+        Integer previous_melody_pitch = null;
+        MelodicNote fragment_note = null;
+        int canon_transpose_interval = 0;
+        PitchCandidate expResult = null;
+        //PitchCandidate result = ModelIncubator.harmonicChecks(myPC, CF_note, previous_pitch_cf, previous_melody_pitch, fragment_note, canon_transpose_interval);
+        //assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of buildFragmentPitches method, of class ModelIncubator.
+     */
+    @Test
+    public void testBuildFragmentPitches() {
+        System.out.println("buildFragmentPitches");
+        MelodicVoice alter_me = null;
+        int number_of_voices = 0;
+        ModeModule my_mode_module = null;
+        MelodicVoice expResult = null;
+        MelodicVoice result = ModelIncubator.buildFragmentPitches(alter_me, number_of_voices, my_mode_module);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of pickWinner method, of class ModelIncubator.
+     */
+    @Test
+    public void testPickWinner() {
+        System.out.println("pickWinner");
+        ArrayList<PitchCandidate> pitch_candidates = null;
+        PitchCandidate expResult = null;
+        PitchCandidate result = ModelIncubator.pickWinner(pitch_candidates);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createbuilt_voice_queues method, of class ModelIncubator.
+     */
+    @Test
+    public void testCreatebuilt_voice_queues() {
+        System.out.println("createbuilt_voice_queues");
+        ArrayList<LinkedList> expResult = null;
+        ArrayList<LinkedList> result = ModelIncubator.createbuilt_voice_queues();
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of calcPeaksTroughs method, of class ModelIncubator.
+     */
+    @Test
+    public void testCalcPeaksTroughs() {
+        System.out.println("calcPeaksTroughs");
+        PitchCandidate pitch_winner = null;
+        ModelIncubator.calcPeaksTroughs(pitch_winner);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of calculate_canon_transpose_interval method, of class ModelIncubator.
+     */
+    @Test
+    public void testCalculate_canon_transpose_interval() {
+        System.out.println("calculate_canon_transpose_interval");
+        Integer vector_shift = 1;
+        Integer b = null;
+        Integer number_of_voices = 3;
+        int[] transpose_interval_array = null;
+        Integer expResult = null;
+        Integer result = ModelIncubator.calculate_canon_transpose_interval(vector_shift, b, number_of_voices, transpose_interval_array);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getEffectiveDuration method, of class ModelIncubator.
+     */
+    @Test
+    public void testGetEffectiveDuration() {
+        System.out.println("getEffectiveDuration");
+        MelodicVoice alter_me = null;
+        MelodicNote fragment_note = null;
+        int fragindex = 0;
+        Double expResult = null;
+        Double result = ModelIncubator.getEffectiveDuration(alter_me, fragment_note, fragindex);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createHoldoverCFArray method, of class ModelIncubator.
+     */
+    @Test
+    public void testCreateHoldoverCFArray() {
+        System.out.println("createHoldoverCFArray");
+        int size = 0;
+        ArrayList<MelodicNote> expResult = null;
+        ArrayList<MelodicNote> result = ModelIncubator.createHoldoverCFArray(size);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of createPreviousCFPitchArray method, of class ModelIncubator.
+     */
+    @Test
+    public void testCreatePreviousCFPitchArray() {
+        System.out.println("createPreviousCFPitchArray");
+        int size = 0;
+        ArrayList<MelodicNote> expResult = null;
+        ArrayList<MelodicNote> result = ModelIncubator.createPreviousCFPitchArray(size);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of getKeyTranspose method, of class ModelIncubator.
+     */
+    @Test
+    public void testGetKeyTranspose() {
+        System.out.println("getKeyTranspose");
+        LinkedList<MelodicNote> chord_prog_stack = null;
+        MelodicNote fragment_note = null;
+        Integer expResult = null;
+        Integer result = ModelIncubator.getKeyTranspose(chord_prog_stack, fragment_note);
+        assertEquals(expResult, result);
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+
+    /**
+     * Test of resetParams method, of class ModelIncubator.
+     */
+    @Test
+    public void testResetParams() {
+        System.out.println("resetParams");
+        ModelIncubator instance = new ModelIncubator();
+        instance.resetParams();
+        // TODO review the generated test code and remove the default call to fail.
+        fail("The test case is a prototype.");
+    }
+    
+    public void setMelodyLine2PeakEndDown() {
+        
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Cfour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Dfour);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
+    }
+    public void setMelodyLine2NewPeakEndUp() {
+        //pitch_winner is a step down
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Cfour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Bfour);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
+    }
+    public void setMelodyLine2SamePeakEndUp() {
+        //pitch_winner is a step down
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Cfour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
+    }
+    public void setMelodyLine2OldPeakEndUp() {
+        //pitch_winner is a step down
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Cfour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Fsfour);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
+    }
+    public void setMelodyLine2SameTroughEndDown() {
+        //pitch_winner is a step up
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Cfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Cfour);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
+    }
+    public void setMelodyLine2NewTroughEndDown() {
+        //pitch_winner is a step up
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Bthree = new MelodicNote();
+        Bthree.setPitch(47);
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Cfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Bthree);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
+    }
+    public void setMelodyLine2ExTroughEndDown() {
+        //pitch_winner is a step up
+        MelodicVoice nextFragment = new MelodicVoice();
+        MelodicNote Bthree = new MelodicNote();
+        Bthree.setPitch(47);
+        MelodicNote Cfour = new MelodicNote();
+        Cfour.setPitch(48);
+        Cfour.setDuration(0.25);
+        MelodicNote Dfour = new MelodicNote();
+        Dfour.setPitch(50);
+        Dfour.setDuration(0.25);
+        MelodicNote Efour = new MelodicNote();
+        Efour.setPitch(52);
+        MelodicNote Fsfour = new MelodicNote();
+        Fsfour.setPitch(54);
+        Fsfour.setDuration(0.25);
+        MelodicNote Gfour = new MelodicNote();
+        Gfour.setPitch(55);
+        Gfour.setDuration(0.25);
+        MelodicNote Afour = new MelodicNote();
+        Afour.setPitch(57);
+        Afour.setDuration(0.25);
+        MelodicNote Bfour = new MelodicNote();
+        Bfour.setPitch(59);
+        Bfour.setDuration(0.25);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Bthree);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Afour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Gfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Fsfour);
+        nextFragment.addMelodicNote(Efour);
+        nextFragment.addMelodicNote(Dfour);
+        nextFragment.addMelodicNote(Cfour);
+        ModelIncubator.peak = Afour.getPitch();
+        ModelIncubator.peak_count = 1;
+        ModelIncubator.trough = Cfour.getPitch();
+        ModelIncubator.trough_count = 1;
     }
 }

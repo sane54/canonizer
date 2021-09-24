@@ -39,6 +39,7 @@ public class MidiOut {
      */
     public static void setDevice () {
         MidiDevice.Info[] devices = MidiSystem.getMidiDeviceInfo();
+
         for (int i=0;i<devices.length;i++) {
             System.out.println("name: " + devices[i].getName() + "    Description: " + devices[i].getDescription());
             if (devices[i].getName().equals("Out To MIDI Yoke:  1") || devices[i].getName().startsWith("loopMIDI") || devices[i].getName().startsWith("JW") ) {

@@ -149,7 +149,7 @@ static {
         //DEBUG
         //System.out.println("starting transposition");
         for (Integer pitch_candidate : pitch_classes) {
-            while (pitch_candidate < input_range_min + 8 || pitch_candidate > input_range_max) {
+            while (pitch_candidate < input_range_min + 8 && pitch_candidate < input_range_max) {//RED FLAG!!!! Test this
                 pitch_candidate +=  12;
             }
             pitch_candidates.add(pitch_candidate);
@@ -274,9 +274,10 @@ static {
     }
     
     @Override
-    public Double getMelodicMotionProbability (Integer input_current_pitch_cand, Integer prev_pitch_p_class, Integer key_transpose, Integer mode_transpose) {
-        System.out.println("getting probability of motion from " + prev_pitch_p_class + " to " + input_current_pitch_cand);
-        Integer difference = input_current_pitch_cand - prev_pitch_p_class;
+    public Double getMelodicMotionProbability (Integer input_current_pitch_cand, Integer prev_pitch, Integer key_transpose, Integer mode_transpose) {
+        System.out.println("getting probability of motion from " + prev_pitch + " to " + input_current_pitch_cand);
+        Integer difference = input_current_pitch_cand - prev_pitch;
+        Integer prev_pitch_p_class = prev_pitch%12;
         Double motion_probability = 0.00;
         //DEBUG
         //System.out.println("getting probability for " + difference + " steps from " + p_class);
@@ -354,7 +355,7 @@ static {
     }
     
     public ArrayList<Integer> getPitchCandidatesGeneric(Integer input_previous_pitch) {
-
+    
     ArrayList<Integer> pitch_step_candidates = new ArrayList();
     ArrayList<Integer> pitch_candidates = new ArrayList();
 
@@ -416,7 +417,7 @@ static {
                 break;
             case (6):
             case (7):
-                if (pclass == 6) pclass =0;
+                if (pclass == 6) pclass = 0;
                 else pclass = (pclass + 7) % 12;
                 //DEBUG
                //System.out.println(step_probability_7.get(difference));
@@ -426,7 +427,7 @@ static {
                 if (pclass == 4) pclass =0;
                 else if (pclass == 6) pclass = 2;
                 else if (pclass == 11) pclass =7;
-                pclass = (pclass + 9) % 12;
+                else pclass = (pclass + 9) % 12;
                 break;
             case (10):
             case (11):

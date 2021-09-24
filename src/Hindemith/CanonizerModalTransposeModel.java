@@ -212,6 +212,18 @@ public class CanonizerModalTransposeModel {
                 continue;
             }
             
+            //GET EFFECTIVE DURATION
+            Double effective_duration = fragment_note.getDuration();
+            Boolean next_note_has_pitch = false;
+            int edi = 1;
+            while (!next_note_has_pitch) {
+                if (alter_me.getMelodicNote(fragindex+edi).getRest()) {
+                    effective_duration += alter_me.getMelodicNote(fragindex+edi).getDuration();
+                    edi++;
+                }
+                else next_note_has_pitch = true;
+            }
+            
             Boolean got_accent = fragment_note.getAccent();
             
             //COMPUTE KEY TRANSPOSE
@@ -284,10 +296,11 @@ public class CanonizerModalTransposeModel {
                     //System.out.println("Starting harmonic analysis of pitch candidates against contemoraneous pitches in voice "+ b);  
                     
                     System.out.println("start looping thru CF");
+                    System.out.println("Getting simulataneous pitches in voice " + b);
                     
                     do {
                         boolean skip_me = false;
-                        System.out.println("Getting simulataneous pitches in voice " + b);
+                        
                         if (holdover_cf.isEmpty() && built_voice_queues.get(b).isEmpty()){
                             System.out.println("both holdover vector and built_voices_queues are empty. this isn't normal");
                             break;
@@ -330,6 +343,9 @@ public class CanonizerModalTransposeModel {
                                 previous_cf_pitch.get(b) == 1111 || //if there is no previous cf pitch ie we are at beginning of cf voice
                                     fragment_note.getRest()) skip_me = true; // if the CP note and CF note both are rests
                         }
+                        
+                        if (effective_duration - fragment_note.getDuration() > .5) skip_me = true;
+                        
                         if (!skip_me){
                             //HARMONICALLY EVALUATE cp candidates against this_cf
                             //DEBUG
@@ -345,13 +361,13 @@ public class CanonizerModalTransposeModel {
                             //System.out.println("skip me was true skip harmonic checks ");
                             //break;
                         }
-                        if (this_cf.getPreviousDuration() > fragment_note.getPreviousDuration()) {  //if cf note extends into next melody note
+                        if (this_cf.getPreviousDuration() > fragment_note.getStartTime() + effective_duration) {  //if cf note extends into next melody note
                             holdover_cf.set(b, this_cf); //reassign holdover note in cf voice, you'll break out of while loop after this
                             System.out.println("adding " + this_cf.getPitch() + " to holdover_cf index " + b);
                         }
                         else holdover_cf.set(b, null);//note it doesn't matter if holdover is rest or pitched. 
                         if (!this_cf.getRest()) previous_cf_pitch.add(b, this_cf.getPitch());//if the cf isn't a rest its the new previous aka "current" cf pitch
-                    } while (this_cf.getPreviousDuration() < fragment_note.getPreviousDuration()); //loop while CP note extends into next CF in voice
+                    } while (this_cf.getPreviousDuration() < fragment_note.getStartTime() + effective_duration); //loop while CP note extends into next CF in voice
                 }
             }
             PitchCandidate pitch_winner = pickWinner(pitch_candidates);
