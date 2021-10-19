@@ -162,5 +162,12 @@ public class MelodicVoice {
         else return null;
     }
     
+    public double getMeasureCount() {
+        double total_beats = 0;
+        for (MelodicNote mynote : note_arraylist) {
+            total_beats = total_beats + mynote.getDuration();
+        }
+        return total_beats/4;
+    }
 }
 

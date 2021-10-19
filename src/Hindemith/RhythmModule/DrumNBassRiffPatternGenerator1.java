@@ -5,7 +5,6 @@
  */
 package Hindemith.RhythmModule;
 
-import Hindemith.RhythmModule.RhythmModule;
 
 /**
  *
@@ -21,15 +20,10 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
 	Random roll = new Random();
 	int patternIndex;
         int tempo = 80;
-        int measure;
 
-	int beatsInBars [] = new int[pieceLength];
+
+
 	Pattern VoiceArray [] = new Pattern[numberOfVoices];
-		
-        //Loop to generate time signature changes in terms of bar lengths
-        for (int iteration = 0; iteration < pieceLength; iteration++) {
-            beatsInBars[iteration] = 8;
-        }
         //DEBUG
         //System.out.println("starting with # of bars = to " + pieceLength);
         for (int voice = 0; voice < numberOfVoices; voice++) {     //for each voice
@@ -38,8 +32,8 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
             Pattern jPattern = new Pattern();
             jPattern.addElement(new Tempo(tempo));
             String voicePatternString = "Rw Rw";
-            for (int barNum = 0; barNum < pieceLength-1; barNum++) {
-		if(voice == 0) {//harmony - this may not work - may have to use 16th notes
+            for (int barNum = 0; barNum < pieceLength/2; barNum = barNum + 2) {
+		if(voice == 7) {//harmony - this may not work - may have to use 16th notes
                     patternIndex = roll.nextInt(5);
                     //patternIndex = 3;
                     switch (patternIndex) {
@@ -57,9 +51,9 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     }
                 jPattern.add(voicePatternString);
                 }
-                if(voice == 1) { //sub voice
-                    if (roll.nextInt(1) == 0) {//roll for Repeat
-                        patternIndex = roll.nextInt(20);
+                if(voice == 0) { //sub voice
+                    if (true) {//roll for Repeat
+                        patternIndex = roll.nextInt(10);
                         //patternIndex = 1;
                         switch (patternIndex) {
                             case 0:		voicePatternString = "Ri A4q C4i A4s Rs C4s Rs A4i Ri Rw";
@@ -92,9 +86,9 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }
 
-                if(voice == 2) { //reese voice
-                    if (roll.nextInt(2) == 0) {//roll for Repeat
-                        patternIndex = roll.nextInt(20);
+                if(voice == 1) { //reese voice
+                    if (true) {//roll for Repeat
+                        patternIndex = roll.nextInt(10);
                         switch (patternIndex) {
                             case 0:		voicePatternString = "A4s Rs Rs C4s Rh. Rw";
                                                     break;
@@ -126,9 +120,9 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }
 								
-                if(voice == 3) { //main voice
-                    if (roll.nextInt(2) == 0) {//roll for Repeat
-                        patternIndex = roll.nextInt(11);
+                if(voice == 2) { //main voice
+                    if (true) {//roll for Repeat
+                        patternIndex = roll.nextInt(10);
                         switch (patternIndex) {
                             case 0:		voicePatternString = "A4q A4s Rs Rs A4s Rs C4s C4s A4s Ri C4s Rs A4q A4s Rs Rs A4s Rs C4s C4s A4s Ri C4s Rs";
                                             break;
@@ -157,9 +151,9 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }
 
-                if(voice == 4) { //melody
-                    if (roll.nextInt(2) == 0) {//roll for Repeat
-                    patternIndex = roll.nextInt(11);
+                if(voice == 3) { //melody
+                    if (true) {//roll for Repeat
+                    patternIndex = roll.nextInt(10);
                     switch (patternIndex) {
                         case 0: 	voicePatternString = "A4w.. A4q";
                                         break;
@@ -188,9 +182,9 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }								
             }
-            if(voice == 5) { //hats
-                if (roll.nextInt(2) == 0) {//roll for Repeat
-                patternIndex = roll.nextInt(11);
+            if(voice == 4) { //hats
+                if (true) {//roll for Repeat
+                patternIndex = roll.nextInt(10);
                     switch (patternIndex) {
                         case 0: 	voicePatternString = "A4s C4s C4s A4s C4s C4s A4s C4s A4s C4s C4s C4s A4s Ri. A4s C4s C4s A4s C4s C4s A4s C4s A4s C4s C4s C4s A4s Ri.";
                                         break;
@@ -218,7 +212,6 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                 }
             }
         }
-        jPattern.add("A4w");
         VoiceArray[voice] = jPattern;
         //DEBUG
         //System.out.println("finished voice " + voice);

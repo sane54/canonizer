@@ -5,7 +5,7 @@
  */
 package Hindemith.RhythmModule;
 
-import Hindemith.RhythmModule.RhythmModule;
+
 
 /**
  *

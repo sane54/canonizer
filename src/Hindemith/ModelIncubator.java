@@ -236,6 +236,8 @@ public class ModelIncubator {
                 for (int x = 0; x < InputParameters.loops; x++) {
                     voice_pattern.add(loopPattern);
                 }
+                //HERE IS WHERE I CAN ADD A REST
+                voice_pattern.add("Rw");
                 music_output.add(voice_pattern);   
             }// end create a jfugue musicstring from the built voice loop
             return music_output;
@@ -541,6 +543,7 @@ public class ModelIncubator {
         }
         
         if (previous_pitch_cf == 1111) return myPC; //ie stop if this is the first note of the counterpoint in the piece
+        if (cand_prev_pitch > 1000) return myPC;
         
         Integer  previous_interval = (cand_prev_pitch  - previous_pitch_cf);
 
@@ -744,7 +747,7 @@ public class ModelIncubator {
                 //System.out.println("using first note pitch candidates");
             }
             else {
-                //if (melody_line.getLatestMelodicInterval() != null && melody_line.getLatestPitch() != null)
+                if (melody_line.getLatestMelodicInterval() != null && melody_line.getLatestPitch() != null)
                 pitch_candidate_values = my_mode_module.getPitchCandidatesGeneric(melody_line.getLatestPitch());
                 //DEBUG
                 //if (pitch_candidate_values.isEmpty()) System.out.println("EMPTY ARRAY!!!!");
@@ -878,6 +881,10 @@ public class ModelIncubator {
                                 previous_pitch_cf.get(b).getPitch() == 1111 ) skip_me = true; //if there is no previous cf pitch ie we are at beginning of cf voice
                         }
                         
+                        Integer got_latest_pitch = 1111;
+                        if (melody_line.getLatestPitch() != null) got_latest_pitch = melody_line.getLatestPitch();
+                        
+                        
                         //or 3. if the accumulated silence between when the fragment note ended and when the CF starts is greater than .5
                         if (effective_duration - fragment_note.getDuration() > .5 &&
                                 this_cf.getStartTime() > fragment_note.getPreviousDuration() + .5) skip_me = true;
@@ -887,11 +894,11 @@ public class ModelIncubator {
                         
                         if (!skip_me){
                             System.out.println("running harmonic checks for pitch candidates against " + this_cf.getPitch());
-                            System.out.println("w previous pitch " + (melody_line.getLatestPitch() + canon_transpose_interval));
+                            System.out.println("w previous pitch " + (got_latest_pitch + canon_transpose_interval));
                             System.out.println("and previous cf pitch in cf  " + b + " is "+ previous_pitch_cf.get(b).getPitch());
                             for (PitchCandidate pitch_candidate: pitch_candidates) {
                                 pitch_candidate = harmonicChecks(pitch_candidate, this_cf, previous_pitch_cf.get(b).getPitch(),
-                                                                melody_line.getLatestPitch(), fragment_note,  canon_transpose_interval, canon_transpose_interval_index, (b%number_of_voices) );
+                                                                got_latest_pitch, fragment_note,  canon_transpose_interval, canon_transpose_interval_index, (b%number_of_voices) );
                             }
 //                            System.out.println(" after harmonic checking against transposition " + b + " the pitch candidates are: ");
 //                            for (PitchCandidate each : pitch_candidates ) {

@@ -15,6 +15,9 @@
 package Hindemith;
 
 import Hindemith.ModeModules.Clydian_keyChange;
+import Hindemith.ModeModules.ChromaticTonic_keyChange;
+import Hindemith.ModeModules.Cblues1;
+import Hindemith.ModeModules.AtonalNoRepeat;
 import Hindemith.ModeModules.ModeModule;
 import Hindemith.RhythmModule.DrumNBassRiffPatternGenerator1;
 import Hindemith.RhythmModule.FunkRiffPatternGenerator;
@@ -25,7 +28,7 @@ import Hindemith.RhythmModule.RhythmModule;
 import Hindemith.RhythmModule.VarTimeSigFunkPatternGeneratorLastHold;
 import Hindemith.RhythmModule.VarTimeSigFunkPatternGeneratorMotif;
 import Hindemith.RhythmModule.VarTimeSigMultiBarFunkRiffPatternGenerator;
-import Hindemith.RhythmModule.VarTimeSigStraightPatternGenerator;
+import Hindemith.RhythmModule.VarTimeSigSuperStraightPatternGenerator;
 import java.io.File;
 
 /**
@@ -40,23 +43,23 @@ static Boolean q_mode = false;
 static Integer [] consonances = {0, 3, 4, 5, 7, 8, 9};
 static Integer [] perfect_consonances = {0, 5, 7};
 static Integer [] root_consonances = {0, 3, 4, 7};
-static int tempo_bpm = 250;
-static int piece_length = 3; //original was 2
+static int tempo_bpm = 160;
+static int piece_length = 4; //original was 2
 static int root_key = 0;
-static ModeModule my_mode_module = new Clydian_keyChange();
-static String [] voice_array = {"bass", "bass", "bass"};  
-static RhythmModule james = new CommonTimeSuperStraightPatternGenerator();
+static ModeModule my_mode_module = new AtonalNoRepeat();
+static String [] voice_array = {"bass", "bass", "bass", "bass"};  
+static RhythmModule james = new DrumNBassRiffPatternGenerator1();
 static boolean large_dissonance_bad = true;
 static File filePath = null;
 static File queueDir = null;
 static File fileDir = null;
 static String queue_directory = null;
 static Integer transpose_interval = 0;
-static int loops = 8; //always keep minimum of 4
+static int loops = 4; //always keep minimum of 4
 //first element of transpose_interval_array is always 0
-static int [] transpose_interval_array = {0,3,4};//9,4,7 is good {0,7,12}
+static int [] transpose_interval_array = {0,7,12,12};//9,4,7 is good {0,7,12}
 static int sample_size = 3; //reduce?
-static byte [] instbyte = { 46, 46, 46};
+static byte [] instbyte = { 46, 46, 46, 46}; //46
 
 public static Boolean get_out_to_midi_yoke () {
     return out_to_midi_yoke;
@@ -106,7 +109,7 @@ public static void setJames(String generator_string){
     if (generator_string.contains("Variable TS Funky Motive")) 
         james = new VarTimeSigFunkPatternGeneratorMotif();
     if (generator_string.contains("Variable TS Straight Time")) 
-        james = new VarTimeSigStraightPatternGenerator();
+        james = new VarTimeSigSuperStraightPatternGenerator();
     if (generator_string.contains("Variable TS Funk Riff Multibar")) 
         james = new VarTimeSigMultiBarFunkRiffPatternGenerator();
     }

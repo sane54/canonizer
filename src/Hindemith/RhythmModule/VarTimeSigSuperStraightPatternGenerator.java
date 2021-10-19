@@ -17,70 +17,61 @@ import java.util.Random;
 
 public class VarTimeSigSuperStraightPatternGenerator  implements RhythmModule{
     @Override
-    public  Pattern[] generate(int pieceLength, int numberOfVoices) {
+    public  Pattern[] generate(int fragmentLength, int numberOfVoices) {
 		Random roll = new Random();
 		int patternIndex;
                 int tempo = 80;
                 int measure;
+                int barpopulate;
 
 		
 		
-		int beatsInBars [] = new int[pieceLength];
-		Pattern VoiceArray [] = new Pattern[numberOfVoices];
 		
-		//Loop to generate time signature changes in terms of bar lengths
-		for (int iteration = 0; iteration < pieceLength; iteration++) {
-			int tsig = roll.nextInt(3);
-			//System.out.println("tsig " + tsig);
-			if (tsig == 0) beatsInBars[iteration] = 2;//2
-			if (tsig == 1) beatsInBars[iteration] = 3;//3
-			if (tsig == 2) beatsInBars[iteration] = 4;//4
-		}
-		
+		Pattern VoiceArray [] = new Pattern[numberOfVoices];		
+                
+                
+                
 		//System.out.println("starting with # of bars = to " + pieceLength);
 		for (int voice = 0; voice < numberOfVoices; voice++) {     //for each voice
                     //System.out.println("voice " + voice);
-                    Pattern jPattern = new Pattern();
-                    jPattern.addElement(new Tempo(tempo));
-                        for (int barNum = 0; barNum < pieceLength; barNum++) { // for each bar
+                    Pattern fragPattern = new Pattern();
+                    fragPattern.addElement(new Tempo(tempo));
+                        
+                    
+                        for (int barNum = 0; barNum < fragmentLength; barNum++) { // for each bar
                             //System.out.println("bar " + barNum);
                             int beat = 1;
-                            measure = beatsInBars[barNum];
-                            jPattern.add("|");
+                            measure = 4;
+                            fragPattern.add("|");
                             //should also add time signature token but there is no jFugue string for it except in v5
                             //System.out.println("measure length " + measure);
-                            while (beat <= measure) 	{                      //for each beat
-                                    //System.out.println("beat " + beat);
-                                    if (voice == 0){ //chord change voice must be in 16ths
-                                        if (beat == 1 && barNum == 0 ) {
-                                            jPattern.add("A4s Rs Rs Rs");
-                                        }
-                                        else {
-                                            patternIndex = roll.nextInt(2);
-                                            if (patternIndex == 0) jPattern.add("A4s Rs Rs Rs");
-                                            if (patternIndex == 1) jPattern.add("Rs Rs Rs Rs"); 
-                                        }
-                                    }
-                                    else {
-                                        patternIndex = (roll.nextInt(4));
-                                        if (patternIndex == 0) jPattern.add("A4q");   
-                                        if (patternIndex == 1) jPattern.add("A4i C4i");
-                                        if (patternIndex == 2) jPattern.add("A4s C4s C4i");
-                                        if (patternIndex == 3) jPattern.add("A4s C4s C4s C4s");
-                                    }
+                            
+                            
+                            
+                            
+                            
+                            barpopulate = roll.nextInt(5);
+                            if (barpopulate == 0) fragPattern.add("A4w");
+                            else if (barpopulate == 1) fragPattern.add("A4h A4h");
+                            else {
+                                while (beat <= measure) 	{                      //for each beat
+                                    patternIndex = roll.nextInt(2);
+                                    if (patternIndex == 0) fragPattern.add("A4s Rs Rs Rs");
+                                    if (patternIndex == 1) fragPattern.add("Rs Rs Rs Rs"); 
+          
 
+                                    
                                     beat++;
-
                                     //System.out.println("patternIndex " + patternIndex);
                                     //System.out.println(jPattern.getMusicString());
                             }
-			
 			}
-                    VoiceArray[voice] = jPattern;
+                        }
+                    VoiceArray[voice] = fragPattern;
                     //System.out.println("finished voice " + voice);
                    // Player my_player = new Player();
-                   // my_player.play(jPattern);
-		}
+                   // my_player.play(fragPattern);
+    }
 	return VoiceArray;
     }
 }
