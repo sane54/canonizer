@@ -32,7 +32,7 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
             Pattern jPattern = new Pattern();
             jPattern.addElement(new Tempo(tempo));
             String voicePatternString = "Rw Rw";
-            for (int barNum = 0; barNum < pieceLength/2; barNum = barNum + 2) {
+            for (int barNum = 0; barNum < pieceLength; barNum = barNum + 2) {
 		if(voice == 7) {//harmony - this may not work - may have to use 16th notes
                     patternIndex = roll.nextInt(5);
                     //patternIndex = 3;
