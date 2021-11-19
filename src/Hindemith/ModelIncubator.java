@@ -9,8 +9,11 @@ import Hindemith.ModeModules.ModeModule;
 import Hindemith.RhythmModule.RhythmModule;
 import static java.lang.Math.abs;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import org.jfugue.Instrument;
 import org.jfugue.Note;
@@ -71,7 +74,7 @@ public class ModelIncubator {
             AccentListener my_accent_listener = new AccentListener();
             this_fragment.setNoteArray(my_accent_listener.listen(rhythm_patterns[i]));
             //DEBUG
-            //System.out.println("adding voice " + i + " to unbuiltvoices");
+            System.out.println("adding voice " + i + " to unbuiltvoices");
             unbuilt_fragments.add(this_fragment);
         }
 
@@ -163,8 +166,21 @@ public class ModelIncubator {
             Pattern music_output = new Pattern();
             music_output.addElement(new Tempo(tempo_bpm));
             
+            Byte voice_order_array [] = new Byte[number_of_voices];
+            List<Byte> voice_order_list = Arrays.asList(voice_order_array);
+            for (Byte i = 0; i <  number_of_voices ; i++){
+                voice_order_array[i] = i;
+            }
+            Collections.shuffle(voice_order_list);
+            voice_order_list.toArray(voice_order_array);
+            System.out.println("VOICE ORDER ARRAY");
+            for (Byte my_voice: voice_order_array){
+                System.out.println(my_voice);
+            }
+            
             //Build canon voices
-            for (byte canon_voice_index = 0; canon_voice_index <  number_of_voices ; canon_voice_index++){
+            for (int i = 0; i <  number_of_voices ; i++){
+                Byte canon_voice_index = voice_order_array[i];
                 Voice jf_voice = new Voice(canon_voice_index);
                 Pattern voice_pattern = new Pattern();
                 Pattern loopPattern = new Pattern();
@@ -190,7 +206,7 @@ public class ModelIncubator {
                 //the for loop immediately below acts as an outer multiplier for canon melody length rests
                 //it also specifies the number of fragment offset rests
                 //its the same as the canon_voice_index ie for voice 0 outer multiplier is 0 for voice 1, outer multiplier is 1 etc
-                for (int k = 0; k < canon_voice_index; k++) {
+                for (int k = 0; k < i; k++) {
                     voice_pattern.add(padPattern);
                     //this for loop acts as an inner multiplier
                     //its the same as number of voices because the number of voices will always equal 
@@ -237,9 +253,10 @@ public class ModelIncubator {
                     voice_pattern.add(loopPattern);
                 }
                 //HERE IS WHERE I CAN ADD A REST
-                voice_pattern.add("Rw");
+                //voice_pattern.add("c4ww");
                 music_output.add(voice_pattern);   
             }// end create a jfugue musicstring from the built voice loop
+            music_output.add("c4ww Rww");
             return music_output;
     }
     public static ArrayList<PitchCandidate> PitchCandidateVetting (ArrayList<PitchCandidate> pitch_candidates, boolean prog_built, boolean is_accent, int pitch_center, int key_transpose, MelodicVoice melody_line) {

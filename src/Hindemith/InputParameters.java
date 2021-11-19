@@ -40,15 +40,15 @@ import java.io.File;
 public class InputParameters {
 static Boolean out_to_midi_yoke = false;
 static Boolean q_mode = false;
-static Integer [] consonances = {0, 3, 4, 5, 7, 8, 9};
-static Integer [] perfect_consonances = {0, 5, 7};
-static Integer [] root_consonances = {0, 3, 4, 7};
-static int tempo_bpm = 160;
-static int piece_length = 4; //original was 2
+static Integer [] consonances = {0, 3, 4, 7, 8, 9};
+static Integer [] perfect_consonances = {0, 7};
+static Integer [] root_consonances = {0, 3, 7};
+static int tempo_bpm = 90;
+static int piece_length = 2; //original was 2
 static int root_key = 0;
 static ModeModule my_mode_module = new AtonalNoRepeat();
-static String [] voice_array = {"bass", "bass", "bass", "bass"};  
-static RhythmModule james = new DrumNBassRiffPatternGenerator1();
+static String [] voice_array = {"bass", "bass", "bass"};  
+static RhythmModule james = new CommonTimeSuperStraightPatternGenerator();
 static boolean large_dissonance_bad = true;
 static File filePath = null;
 static File queueDir = null;
@@ -57,9 +57,9 @@ static String queue_directory = null;
 static Integer transpose_interval = 0;
 static int loops = 4; //always keep minimum of 4
 //first element of transpose_interval_array is always 0
-static int [] transpose_interval_array = {0,7,12,12};//9,4,7 is good {0,7,12}
+static int [] transpose_interval_array = {0,7,12};//9,4,7 is good {0,7,12}
 static int sample_size = 3; //reduce?
-static byte [] instbyte = { 46, 46, 46, 46}; //46
+static byte [] instbyte = { 3, 3, 3}; //46, 6, 16, 56, 96, 3, 73, 53, 57, 45, 49
 
 public static Boolean get_out_to_midi_yoke () {
     return out_to_midi_yoke;
@@ -122,6 +122,14 @@ public static String testJames() {
 public static void setVoiceArray (String [] my_voice_array){
     voice_array = my_voice_array;
     }
+public static void setInstByte (byte [] my_array){
+    instbyte = my_array;
+    }
+
+public static void setTransposeIntervals (int [] my_array){
+    transpose_interval_array = my_array;
+    }
+
 public static ModeModule getModeModule() {
     return my_mode_module;
 }
@@ -132,18 +140,18 @@ public static String testModeModule() {
 public static void setModeModule (String this_mode_module) {
     if (this_mode_module.contains("Lydian"))
         my_mode_module = new Clydian_keyChange();
-//    if (this_mode_module.contains("Chromatic Tonic")) {
-//        my_mode_module = new ChromaticTonic_keyChange();
-//    }
-//    if (this_mode_module.contains("Atonal (w/o Repeat Notes)")) {
-//        my_mode_module = new AtonalNoRepeat();
-//    }
+    if (this_mode_module.contains("Chromatic Tonic")) {
+        my_mode_module = new ChromaticTonic_keyChange();
+    }
+    if (this_mode_module.contains("Atonal (w/o Repeat Notes)")) {
+        my_mode_module = new AtonalNoRepeat();
+    }
 //        if (this_mode_module.contains("Atonal (repeat pitch prefer)")) {
 //        my_mode_module = new AtonalRepeatPrefer();
 //    }
-//        if (this_mode_module.contains("Blues")) {
-//        my_mode_module = new Cblues1();
-//    }
+        if (this_mode_module.contains("Blues")) {
+        my_mode_module = new Cblues1();
+    }
 }
 public static void setPieceLength(int my_piece_length) {
     piece_length = my_piece_length;    

@@ -86,33 +86,31 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }
 
-                if(voice == 1) { //reese voice
+                if(voice == 1) { //reese voice - this doesn't work
                     if (true) {//roll for Repeat
-                        patternIndex = roll.nextInt(10);
+                        patternIndex = roll.nextInt(11);
                         switch (patternIndex) {
                             case 0:		voicePatternString = "A4s Rs Rs C4s Rh. Rw";
                                                     break;
-                            case 1:             voicePatternString = "A4s Rs Rs C4s Rq. C4i A4s A4s Ri A4i. A4i. A4q C4i";
+                            case 1:		voicePatternString = "A4s Rs Rs C4s Rs Rs A4i Rs A4i Rs A4s Rs A4s Rs A4s Rs Rs C4s Rs Rs A4i Rs A4i Rs A4s Rs A4s Rs";
                                                     break;
-                            case 2:		voicePatternString = "A4s Rs Rs C4s Rs Rs A4i Rs A4i Rs  A4s Rs A4s Rs A4s Rs Rs C4s Rs Rs A4i Rs A4i Rs  A4s Rs A4s Rs";
+                            case 2:		voicePatternString = "A4i C4s C4s C4s A4s Rs C4s A4i C4s C4s C4s A4s Rs C4s A4i C4s C4s C4s A4s Rs C4s A4i C4s C4s C4s A4s Rs C4s";
                                                     break;
-                            case 3:		voicePatternString = "A4i C4s C4s C4s A4s Rs C4s  A4i C4s C4s C4s A4s Rs C4s A4i C4s C4s C4s A4s Rs C4s A4i C4s C4s C4s A4s Rs C4s";
+                            case 3:		voicePatternString = "A4q. Rs A4q A4q Rs A4q. Rs A4q A4q Rs";
                                                     break;
-                            case 4:		voicePatternString = "A4q. Rs A4q A4q Rs A4q. Rs A4q A4q Rs";
+                            case 4:		voicePatternString = "A4i. A4q Rs A4i. A4q Rs Rw";
                                                     break;
-                            case 5:		voicePatternString = "A4i. A4q Rs A4i. A4q Rs Rw";
+                            case 5:		voicePatternString = "A4q. A4q. A4q. C4i A4q Rh";
                                                     break;
-                            case 6:		voicePatternString = "A4q. A4q. A4q. A4q Rh";
-                                                    break;
-                            case 7:		voicePatternString = "A4q c4q A4h A4q. A4q. Rq";
+                            case 6:		voicePatternString = "A4q c4q A4h A4q. A4q. Rq";
                                                  break;
-                            case 8: 	voicePatternString = "Rs A4i. A4s Ri A4i. A4i Rq Rs A4i. A4s Ri A4i. A4i Rq";
+                            case 7: 	voicePatternString = "Rs A4i. A4s Ri A4i. A4i Rq Rs A4i. A4s Ri A4i. A4i Rq";
                                         break;
-                            case 9:	voicePatternString = "C4i. A4i. Ri A4i A4i Rh A4q Rh";
+                            case 8:	voicePatternString = "C4i. A4i. Ri A4i A4i Rh A4q Rh";
                                         break;
-                            case 10:	voicePatternString = "A4i. C4i. A4i. C4i. Ri C4i A4i C4i A4q A4q Rq";
+                            case 9:	voicePatternString = "A4i. C4i. A4i. C4i. Ri C4i A4i C4i A4q A4q Rq";
                                         break;
-                            case 11:	voicePatternString = "Ri. A4i. A4i. A4i. Ri C4i A4i. C4s A4q Rh";
+                            case 10:	voicePatternString = "Ri. A4i. A4i. A4i. Ri C4i A4i. C4s A4q Rh";
                                         break;
                             default:	voicePatternString = "Rw Rw";
                         }
@@ -151,7 +149,7 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }
 
-                if(voice == 3) { //melody
+                if(voice == 3) { //melody - this doesn't work
                     if (true) {//roll for Repeat
                     patternIndex = roll.nextInt(10);
                     switch (patternIndex) {
@@ -182,7 +180,7 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                     jPattern.add(voicePatternString);
                 }								
             }
-            if(voice == 4) { //hats
+            if(voice == 4) { //hats - this doesn't work
                 if (true) {//roll for Repeat
                 patternIndex = roll.nextInt(10);
                     switch (patternIndex) {
@@ -204,7 +202,7 @@ public class DrumNBassRiffPatternGenerator1  implements RhythmModule{
                                         break;
                         case 8: 	voicePatternString = "A4q C4s C4s Ri. C4s C4s C4s A4s C4s C4s C4s A4i C4i C4s C4s Ri. C4s C4s C4s A4s C4s C4s C4s";
                                         break;
-                        case 9: 	voicePatternString = "A4i C4i C4i C4i A4i C4i C4i C4i";
+                        case 9: 	voicePatternString = "A4i C4i C4i C4i A4i C4i C4i C4i A4i C4i C4i C4i A4i C4i C4i C4i";
                                         break;
                         default:	voicePatternString = "Rw Rw"; 		
                     }   
