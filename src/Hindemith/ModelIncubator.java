@@ -22,6 +22,7 @@ import org.jfugue.Tempo;
 import org.jfugue.Voice;
 import org.jfugue.Player;
 import java.util.Objects;
+import org.jfugue.extras.IntervalPatternTransformer;
 
 
 /**
@@ -110,6 +111,8 @@ public class ModelIncubator {
         //DEBUG
         System.out.println(music_output.getMusicString());
         //PatternStorerSaver1.add_pattern(music_output);
+        IntervalPatternTransformer my_transposer = new IntervalPatternTransformer(transpose_interval);
+        music_output = my_transposer.transform(music_output);
         Player player1 = new Player();
         System.out.println("playing music output");
         player1.play(music_output);
@@ -243,7 +246,7 @@ public class ModelIncubator {
                             jf_note.setAttackVelocity((byte)0);
                             jf_note.setDecayVelocity((byte)0);
                         }
-                        System.out.println(jf_note.getMusicString());
+                        //System.out.println(jf_note.getMusicString());
                         //add the jfugue note to jfugue voice
                         loopPattern.addElement(jf_note);
                     }    
@@ -252,11 +255,9 @@ public class ModelIncubator {
                 for (int x = 0; x < InputParameters.loops; x++) {
                     voice_pattern.add(loopPattern);
                 }
-                //HERE IS WHERE I CAN ADD A REST
-                //voice_pattern.add("c4ww");
                 music_output.add(voice_pattern);   
             }// end create a jfugue musicstring from the built voice loop
-            music_output.add("c4ww Rww");
+            if (Hindemith.InputParameters.getTempo() > 100) music_output.add("c4ww Rww");
             return music_output;
     }
     public static ArrayList<PitchCandidate> PitchCandidateVetting (ArrayList<PitchCandidate> pitch_candidates, boolean prog_built, boolean is_accent, int pitch_center, int key_transpose, MelodicVoice melody_line) {
@@ -528,7 +529,7 @@ public class ModelIncubator {
             //System.out.println(cand_pitch + " against " + cf_pitch + "is dissonant");
             myPC.decrementRank(Decrements.dissonance);
             //decrement if a severe dissonance
-            if ((this_interval_class == 1 || this_interval_class == 6)&& (this_interval <36 || large_dissonance_bad)){
+            if ((this_interval_class == 1 || this_interval_class == 6 || this_interval_class == 11)&& (this_interval <36 || large_dissonance_bad)){
                 myPC.decrementRank(Decrements.severe_dissonance);
                 myPC.set_minor_9th();
                 major_dissonance = true;
@@ -1188,6 +1189,7 @@ public class ModelIncubator {
         unbuilt_fragments.clear();
         motion_counts.clear();
         pitch_counts.clear();
+        melody_motion_counts.clear();
         trough = 0;
         trough_count = 0;
         peak = 0;
@@ -1195,5 +1197,14 @@ public class ModelIncubator {
         same_consonant_count = 0;
         key_transpose = 0;
         harmonic_prog_built = false;
+        melody_line = new MelodicVoice();
+        melody_pitch_count = 0;
+        same_inv_consonant_count = 0;
+        same_consonant_count = 0;
+        voice_pitch_count = 0;
+        transpose_arrayS.clear();
+        harmonic_prog = new MelodicVoice();
+        this_key = new MelodicNote();
+        
     }
 }

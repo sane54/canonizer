@@ -42,7 +42,7 @@ static Boolean out_to_midi_yoke = false;
 static Boolean q_mode = false;
 static Integer [] consonances = {0, 3, 4, 7, 8, 9};
 static Integer [] perfect_consonances = {0, 7};
-static Integer [] root_consonances = {0, 3, 7};
+static Integer [] root_consonances = {0, 3, 4, 7};
 static int tempo_bpm = 90;
 static int piece_length = 2; //original was 2
 static int root_key = 0;
@@ -55,11 +55,11 @@ static File queueDir = null;
 static File fileDir = null;
 static String queue_directory = null;
 static Integer transpose_interval = 0;
-static int loops = 4; //always keep minimum of 4
+static int loops = 8; //always keep minimum of 4
 //first element of transpose_interval_array is always 0
 static int [] transpose_interval_array = {0,7,12};//9,4,7 is good {0,7,12}
 static int sample_size = 3; //reduce?
-static byte [] instbyte = { 3, 3, 3}; //46, 6, 16, 56, 96, 3, 73, 53, 57, 45, 49
+static byte [] instbyte = { 97, 97, 97}; //46, 6, 16, 56, 96, 3, 73, 53, 57, 45, 49
 
 public static Boolean get_out_to_midi_yoke () {
     return out_to_midi_yoke;
@@ -68,6 +68,10 @@ public static Boolean get_out_to_midi_yoke () {
      queue_directory = direct;
  }
  
+  public static void setOverallTranspose(int interval) {
+     transpose_interval = interval;
+ }
+  
  public static String getQueueDirectory() {
      return queue_directory;
  }
