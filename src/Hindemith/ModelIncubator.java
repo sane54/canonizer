@@ -215,9 +215,10 @@ public class ModelIncubator {
                     //its the same as number of voices because the number of voices will always equal 
                     //the number of fragments in the canon melody
                     //together the inner and outer multiplier will add 0 padding rests to the first voice, 1 times number of fragments
-                    //to the second voice, 2 times number of fragments to third voice etc. 
+                    //to the second voice, 2 times number of fragments to third voice etc.
+                    if (roll.nextInt(2) == 1)
                     for (int l = 0; l < number_of_voices; l++) //1 
-                        voice_pattern.add(padPattern);
+                       voice_pattern.add(padPattern);
                 }
                 //DEBUG
                 System.out.println(transposed_voices.size());
@@ -237,7 +238,7 @@ public class ModelIncubator {
                             jf_int = final_note.getPitch();
                             byte jf_note_byte = (byte)jf_int;
                             jf_note.setValue(jf_note_byte);
-                            //if (!final_note.getAccent()) jf_note.setAttackVelocity((byte)40); UNCOMMENT THIS IN FINAL
+                            if (!final_note.getAccent()) jf_note.setAttackVelocity((byte)40); //UNCOMMENT THIS IN FINAL
                         }
                         else {
                             //DEBUG
@@ -257,13 +258,15 @@ public class ModelIncubator {
                 }
                 music_output.add(voice_pattern);   
             }// end create a jfugue musicstring from the built voice loop
-            if (Hindemith.InputParameters.getTempo() > 100) music_output.add("c4ww Rww");
+            if (Hindemith.InputParameters.getTempo() > 100) music_output.add("Rww Rww");
+            else music_output.add("Rww");
             return music_output;
     }
     public static ArrayList<PitchCandidate> PitchCandidateVetting (ArrayList<PitchCandidate> pitch_candidates, boolean prog_built, boolean is_accent, int pitch_center, int key_transpose, MelodicVoice melody_line) {
         Integer [] consonances = InputParameters.consonances;
         Integer [] perfect_consonances = InputParameters.perfect_consonances;
         Integer [] root_consonances = InputParameters.root_consonances;
+        String mode_string = InputParameters.my_mode_module.mytoString();
         Random roll = new Random();
         for (PitchCandidate myPC : pitch_candidates){
             int cand_pitch = myPC.getPitch();
@@ -271,28 +274,29 @@ public class ModelIncubator {
             //("evaluating pitch candidate " + cand_pitch);
             
             //Check if Dissonant with Root - Does not apply for harmonic prog
-//            if (prog_built) {
-//                boolean root_interval_consonant = false;
-//                int root_interval = abs(cand_pitch%12 - key_transpose);
-//                for (Integer consonance : root_consonances) {
-//                    if (root_interval == consonance) root_interval_consonant = true;
-//                }
-//                if(root_interval_consonant) {
-//                    //DEBUG
-//                    System.out.println(cand_pitch + " consonant with root " + key_transpose );
-//                }
-//                else {
-//                    if (is_accent ) {
-//                        myPC.decrementRank(Decrements.dissonant_with_root);
-//                        //DEBUG
-//                        System.out.println(cand_pitch + " dissonant accent with root " + key_transpose);
-//                    }
-//                    else {
-//                        //DEBUG
-//                        System.out.println(cand_pitch + " dissonant with root but note not accented" );
-//                    }
-//                }                 
-//            }
+            if (prog_built && mode_string.startsWith("Atonal") == false ) {
+                boolean root_interval_consonant = false;
+                int root_interval = abs(cand_pitch%12 - key_transpose);
+                for (Integer consonance : root_consonances) {
+                    if (root_interval == consonance) root_interval_consonant = true;
+                }
+                if(root_interval_consonant) {
+                    //DEBUG
+                    System.out.println(cand_pitch + " consonant with root " + key_transpose );
+                }
+                else {
+                    if (is_accent ) {
+                        myPC.decrementRank(Decrements.dissonant_with_root);
+                        //DEBUG
+                        System.out.println(cand_pitch + " dissonant accent with root " + key_transpose);
+                    }
+                    else {
+                        //DEBUG
+                        System.out.println(cand_pitch + " dissonant with root but note not accented" );
+                    }
+                }                 
+            }
+            else System.out.println("skipped root consonance check");
 
             //randomly decrement non-tonics
             if (cand_pitch%12 != key_transpose){

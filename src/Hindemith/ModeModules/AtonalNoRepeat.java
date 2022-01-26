@@ -77,17 +77,19 @@ public class AtonalNoRepeat implements ModeModule {
                 break;
             case (1):
             case (2):
-                if (pclass == 10 || pclass == 11) pclass = 0;
-                else pclass += 2;
+//                if (pclass == 10 || pclass == 11) pclass = 0;
+//                else pclass += 2;
+                pclass += 2;
                 //DEBUG
                 //System.out.println(step_probability_2.get(difference));
                 break;
             case (3):
             case (4):
-                if (pclass == 4 || pclass == 6) pclass += 3;
-                else if (pclass == 10 || pclass == 11) pclass = 2;
-                else if (pclass == 8 || pclass ==9) pclass =0;
-                else pclass +=4;
+//                if (pclass == 4 || pclass == 6) pclass += 3;
+//                else if (pclass == 10 || pclass == 11) pclass = 2;
+//                else if (pclass == 8 || pclass ==9) pclass =0;
+//                else pclass +=4;
+                pclass +=4;
                 //DEBUG
                 //System.out.println(step_probability_4.get(difference));
                 break;
@@ -98,25 +100,27 @@ public class AtonalNoRepeat implements ModeModule {
                 break;
             case (6):
             case (7):
-                if (pclass == 6) pclass = 0;
-                else pclass = (pclass + 7) % 12;
+//                if (pclass == 6) pclass = 0;
+//                else pclass = (pclass + 7) % 12;
+                pclass = (pclass + 7) % 12;
                 //DEBUG
                //System.out.println(step_probability_7.get(difference));
                 break;
             case (8):
             case (9):
-                if (pclass == 4) pclass =0;
-                else if (pclass == 6) pclass = 2;
-                else if (pclass == 11) pclass =7;
-                else pclass = (pclass + 9) % 12;
+//                if (pclass == 4) pclass =0;
+//                else if (pclass == 6) pclass = 2;
+//                else if (pclass == 11) pclass =7;
+//                else pclass = (pclass + 9) % 12;
+                pclass = (pclass + 9) % 12;
                 break;
             case (10):
             case (11):
-                if (pclass == 2) pclass =0;
-                else if (pclass == 4) pclass = 2;
-                else if (pclass == 6) pclass = 4;
-                else if (pclass == 9) pclass = 7;
-                else if (pclass == 11) pclass =9;
+//                if (pclass == 2) pclass =0;
+//                else if (pclass == 4) pclass = 2;
+//                else if (pclass == 6) pclass = 4;
+//                else if (pclass == 9) pclass = 7;
+//                else if (pclass == 11) pclass =9;
                 pclass = (pclass + 11) % 12;
                 //DEBUG
                //System.out.println(step_probability_11.get(difference));

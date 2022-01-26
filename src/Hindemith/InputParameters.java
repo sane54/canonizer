@@ -18,6 +18,8 @@ import Hindemith.ModeModules.Clydian_keyChange;
 import Hindemith.ModeModules.ChromaticTonic_keyChange;
 import Hindemith.ModeModules.Cblues1;
 import Hindemith.ModeModules.AtonalNoRepeat;
+import Hindemith.ModeModules.CMajor;
+import Hindemith.ModeModules.CMinor;
 import Hindemith.ModeModules.ModeModule;
 import Hindemith.RhythmModule.DrumNBassRiffPatternGenerator1;
 import Hindemith.RhythmModule.FunkRiffPatternGenerator;
@@ -55,7 +57,7 @@ static File queueDir = null;
 static File fileDir = null;
 static String queue_directory = null;
 static Integer transpose_interval = 0;
-static int loops = 8; //always keep minimum of 4
+static int loops = 6; //always keep minimum of 4
 //first element of transpose_interval_array is always 0
 static int [] transpose_interval_array = {0,7,12};//9,4,7 is good {0,7,12}
 static int sample_size = 3; //reduce?
@@ -144,6 +146,8 @@ public static String testModeModule() {
 public static void setModeModule (String this_mode_module) {
     if (this_mode_module.contains("Lydian"))
         my_mode_module = new Clydian_keyChange();
+    if (this_mode_module.contains("Major"))
+        my_mode_module = new CMajor();
     if (this_mode_module.contains("Chromatic Tonic")) {
         my_mode_module = new ChromaticTonic_keyChange();
     }

@@ -16,24 +16,27 @@ import java.util.Random;
  *
  * @author alyssa
  */
-public class Clydian_keyChange implements ModeModule {
+public class CMajor implements ModeModule {
     Random roll = new Random();
     private final int tonic = 0;
     
     private static final Map<Integer, Double> step_probability_0;
 	static {
 		step_probability_0 = new HashMap<>();
-		step_probability_0.put(0, 0.03);
-                step_probability_0.put(2, 0.01);
-                step_probability_0.put(-1, 0.1);
-                step_probability_0.put(-3, 0.1);
-                step_probability_0.put(4, 0.15);
-                step_probability_0.put(-5, 0.15);
-                step_probability_0.put(7, 0.1);
-                step_probability_0.put(-8, 0.1);
-                step_probability_0.put(9, 0.1);
-                step_probability_0.put(12, 0.03);
-                step_probability_0.put(-12, 0.03);
+		step_probability_0.put(0, 0.083);
+                step_probability_0.put(2, 0.083);
+                step_probability_0.put(-1, 0.083);
+                step_probability_0.put(-3, 0.083);
+                step_probability_0.put(4, 0.083);
+                step_probability_0.put(5, 0.083);
+                step_probability_0.put(-7, 0.083);
+                step_probability_0.put(-5, 0.083);
+                step_probability_0.put(7, 0.083);
+                step_probability_0.put(-8, 0.083);
+                step_probability_0.put(9, 0.083);
+                step_probability_0.put(12, 0.083);
+                step_probability_0.put(-10, 0.004);
+                
 
 	};
     private static final Map<Integer, Double> step_probability_1;
@@ -46,23 +49,27 @@ public class Clydian_keyChange implements ModeModule {
 private static final Map<Integer, Double> step_probability_2;
 static {
 		step_probability_2 = new HashMap<>();
-                step_probability_2.put(2, 0.35);
-                step_probability_2.put(-2, 0.35);
-                step_probability_2.put(-3, 0.15);
+                step_probability_2.put(2, 0.25);
+                step_probability_2.put(-2, 0.25);
+                step_probability_2.put(3, 0.1);
+                step_probability_2.put(-3, 0.1);
                 step_probability_2.put(5, 0.1);
+                step_probability_2.put(-5, 0.05);
                 step_probability_2.put(7, 0.05);
+                step_probability_2.put(-7, 0.05);
+                step_probability_2.put(0, 0.05);
 };
     private static final Map<Integer, Double> step_probability_3;
 	static {
             step_probability_3 = new HashMap<>();
-            step_probability_3.put(-3, 0.50);
-            step_probability_3.put(2, 0.50);
+            step_probability_3.put(-3, 0.25);
+            step_probability_3.put(1, 0.75);
         };
 private static final Map<Integer, Double> step_probability_4;
 static {
 	step_probability_4 = new HashMap<>();
                 step_probability_4.put(0, 0.02);
-		step_probability_4.put(2, 0.05);
+		step_probability_4.put(1, 0.05);
                 step_probability_4.put(-2, 0.01);
                 step_probability_4.put(3, 0.2);
                 step_probability_4.put(-4, 0.3);
@@ -75,8 +82,12 @@ static {
 private static final Map<Integer, Double> step_probability_5;
     static {
             step_probability_5 = new HashMap<>();
-            step_probability_5.put(2, 0.50);
-            step_probability_5.put(-1, 0.50);
+            step_probability_5.put(2, 0.25);
+            step_probability_5.put(4, 0.15);
+            step_probability_5.put(-1, 0.5);
+            step_probability_5.put(-3, 0.05);
+            step_probability_5.put(0, 0.05);
+            
     };
 private static final Map<Integer, Double> step_probability_6;
 static {
@@ -90,7 +101,7 @@ private static final Map<Integer, Double> step_probability_7;
 static {
 	step_probability_7 = new HashMap<>();
                 step_probability_7.put(0, 0.03);
-                step_probability_7.put(-1, 0.05);
+                step_probability_7.put(-2, 0.05);
                 step_probability_7.put(2, 0.1);
                 step_probability_7.put(-3, 0.1);
                 step_probability_7.put(5, 0.1);
@@ -105,14 +116,15 @@ static {
     private static final Map<Integer, Double> step_probability_8;
 	static {
             step_probability_8 = new HashMap<>();
-            step_probability_8.put(-1, 1.00);
+            step_probability_8.put(-1, 0.5);
+            step_probability_8.put(-3, 0.5);
         };
 private static final Map<Integer, Double> step_probability_9;
 static {
 	step_probability_9 = new HashMap<>();
 	step_probability_9.put(-2, 0.25);
         step_probability_9.put(3, 0.2);
-        step_probability_9.put(-3, 0.2);
+        step_probability_9.put(-4, 0.2);
         step_probability_9.put(2, 0.25);
 	step_probability_9.put(5, 0.07);
 	step_probability_9.put(-5, 0.03);
@@ -397,7 +409,7 @@ static {
             case (1):
             case (2):
                 if (pclass == 10 || pclass == 11) pclass = 0;
-                else if (pclass == 6) pclass = 7;
+                else if (pclass == 4) pclass = 5;
                 else pclass += 2;
                 //DEBUG
                 //System.out.println(step_probability_2.get(difference));
@@ -407,12 +419,13 @@ static {
                 if (pclass == 4 || pclass == 6) pclass += 3;
                 else if (pclass == 10 || pclass == 11) pclass = 2;
                 else if (pclass == 8 || pclass ==9) pclass =0;
+                else if (pclass == 2) pclass = 5;
                 else pclass +=4;
                 //DEBUG
                 //System.out.println(step_probability_4.get(difference));
                 break;
             case (5):
-                if (pclass ==0 ) pclass = 6;
+                if (pclass == 5) pclass = 11;
                 else pclass = (pclass + 5) % 12;
                 //DEBUG
                 //System.out.println(step_probability_5.get(difference));
@@ -420,6 +433,7 @@ static {
             case (6):
             case (7):
                 if (pclass == 6) pclass = 0;
+                else if (pclass == 11) pclass = 5;
                 else pclass = (pclass + 7) % 12;
                 //DEBUG
                //System.out.println(step_probability_7.get(difference));
@@ -428,14 +442,16 @@ static {
             case (9):
                 if (pclass == 4) pclass =0;
                 else if (pclass == 6) pclass = 2;
+                else if (pclass == 9) pclass = 5;
                 else if (pclass == 11) pclass =7;
                 else pclass = (pclass + 9) % 12;
                 break;
             case (10):
             case (11):
-                if (pclass == 2) pclass = 0;
+                if (pclass == 2) pclass =0;
                 else if (pclass == 4) pclass = 2;
-                else if (pclass == 6) pclass = 4;
+                else if (pclass == 5) pclass = 4;
+                else if (pclass == 7) pclass = 5;
                 else if (pclass == 9) pclass = 7;
                 else if (pclass == 11) pclass =9;
                 else pclass = (pclass + 11) % 12;

@@ -23,20 +23,20 @@ public class Canonizer {
     public static void main(String[] args) {
         Random roll = new Random();
         while (true) {
-        switch ( roll.nextInt(4) ){
-            case (0):
-                Hindemith.InputParameters.setModeModule("Lydian");
-                break;
-            case (1):
-                Hindemith.InputParameters.setModeModule("Chromatic Tonic");
-                break;
-            case (2):
-                Hindemith.InputParameters.setModeModule("Atonal (w/o Repeat Notes)");
-                break;
-            case (3):
-                Hindemith.InputParameters.setModeModule("Blues");
-                break;
-        }
+//        switch ( roll.nextInt(4) ){
+//            case (0):
+//                Hindemith.InputParameters.setModeModule("Lydian");
+//                break;
+//            case (1):
+//                Hindemith.InputParameters.setModeModule("Chromatic Tonic");
+//                break;
+//            case (2):
+//                Hindemith.InputParameters.setModeModule("Atonal (w/o Repeat Notes)");
+//                break;
+//            case (3):
+//                Hindemith.InputParameters.setModeModule("Blues");
+//                break;
+//        }
         switch ( roll.nextInt(3) ){
             case (0):
                 Hindemith.InputParameters.setJames("Drum and Bass Patterns 1");
@@ -51,10 +51,11 @@ public class Canonizer {
         Hindemith.InputParameters.setTempo(60 + roll.nextInt(200));
         Hindemith.InputParameters.setPieceLength(1 + roll.nextInt(2));
         Integer number_voices = 2 + roll.nextInt(4);
+        //number_voices = 2;
         String []  voice_array = new String[number_voices];
         byte [] inst_array = new byte[number_voices];
         ArrayList<Byte> inst_collection = new ArrayList();
-        Integer [] t_intervals = {3, 5, 7, 12};
+        Integer [] t_intervals = {2, 4, 5, 7, 9, 11, 12}; //Relevant intervals are 2, 4, 5, 7, 9, 11, 12
         int [] transpose_intervals = new int[number_voices];
         for (int i = 0; i < number_voices; i++){
             voice_array[i] = "bass";
@@ -68,8 +69,8 @@ public class Canonizer {
                 }
                 break;
             case (1):
-                inst_collection.add((byte)16);
-                inst_collection.add((byte)17);
+                inst_collection.add((byte)6);
+                //inst_collection.add((byte)7);
                 for (int i = 0; i < number_voices; i++){
                     inst_array[i] = inst_collection.get(roll.nextInt(inst_collection.size()));
                 }
@@ -157,7 +158,7 @@ public class Canonizer {
         
         transpose_intervals[0] = 0;
         for (int i = 1; i < number_voices; i++){
-            transpose_intervals[i] = t_intervals[roll.nextInt(3)];
+            transpose_intervals[i] = t_intervals[roll.nextInt(t_intervals.length)];
         }
         
         Hindemith.InputParameters.setVoiceArray(voice_array);
