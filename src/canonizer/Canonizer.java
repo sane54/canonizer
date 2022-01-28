@@ -23,7 +23,7 @@ public class Canonizer {
     public static void main(String[] args) {
         Random roll = new Random();
         while (true) {
-//        switch ( roll.nextInt(4) ){
+//        switch ( roll.nextInt(6) ){
 //            case (0):
 //                Hindemith.InputParameters.setModeModule("Lydian");
 //                break;
@@ -35,6 +35,12 @@ public class Canonizer {
 //                break;
 //            case (3):
 //                Hindemith.InputParameters.setModeModule("Blues");
+//                break;
+//            case (4):
+//                Hindemith.InputParameters.setModeModule("Major");
+//                break;
+//            case (5):
+//                Hindemith.InputParameters.setModeModule("Minor");
 //                break;
 //        }
         switch ( roll.nextInt(3) ){
@@ -65,7 +71,7 @@ public class Canonizer {
         switch ( roll.nextInt(11) ){
             case (0):
                 for (int i = 0; i < number_voices; i++){
-                    inst_array[i] = (byte)19;
+                    inst_array[i] = (byte)4;
                 }
                 break;
             case (1):

@@ -110,6 +110,8 @@ public class ModelIncubator {
         
         //DEBUG
         System.out.println(music_output.getMusicString());
+        System.out.println(my_mode_module.mytoString());
+        System.out.println(james.toString());
         //PatternStorerSaver1.add_pattern(music_output);
         IntervalPatternTransformer my_transposer = new IntervalPatternTransformer(transpose_interval);
         music_output = my_transposer.transform(music_output);
@@ -168,6 +170,8 @@ public class ModelIncubator {
             //declare the final output Pattern and set its tempo
             Pattern music_output = new Pattern();
             music_output.addElement(new Tempo(tempo_bpm));
+            Boolean pad_me = false;
+            if (roll.nextInt(3) == 1) pad_me = true;
             
             Byte voice_order_array [] = new Byte[number_of_voices];
             List<Byte> voice_order_list = Arrays.asList(voice_order_array);
@@ -216,7 +220,7 @@ public class ModelIncubator {
                     //the number of fragments in the canon melody
                     //together the inner and outer multiplier will add 0 padding rests to the first voice, 1 times number of fragments
                     //to the second voice, 2 times number of fragments to third voice etc.
-                    if (roll.nextInt(2) == 1)
+                    if (pad_me)
                     for (int l = 0; l < number_of_voices; l++) //1 
                        voice_pattern.add(padPattern);
                 }
@@ -252,14 +256,17 @@ public class ModelIncubator {
                         loopPattern.addElement(jf_note);
                     }    
                 }
-                //System.out.println(loopPattern.getMusicString());                
-                for (int x = 0; x < InputParameters.loops; x++) {
+                //System.out.println(loopPattern.getMusicString());
+                int loop_factor = i;
+                if (i >= number_of_voices -2) loop_factor = i + 1;
+                for (int x = 0; x < InputParameters.loops - loop_factor; x++) {
                     voice_pattern.add(loopPattern);
                 }
+                voice_pattern.add("Rww");
                 music_output.add(voice_pattern);   
             }// end create a jfugue musicstring from the built voice loop
-            if (Hindemith.InputParameters.getTempo() > 100) music_output.add("Rww Rww");
-            else music_output.add("Rww");
+            //if (Hindemith.InputParameters.getTempo() > 100) music_output.add("Rww Rww");
+            //else music_output.add("Rww");
             return music_output;
     }
     public static ArrayList<PitchCandidate> PitchCandidateVetting (ArrayList<PitchCandidate> pitch_candidates, boolean prog_built, boolean is_accent, int pitch_center, int key_transpose, MelodicVoice melody_line) {

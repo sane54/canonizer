@@ -363,7 +363,7 @@ static {
     }
     
     public String mytoString() {
-        return "C Lydian";
+        return "Major";
     }
     
     public ArrayList<Integer> getPitchCandidatesGeneric(Integer input_previous_pitch) {

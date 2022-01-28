@@ -48,7 +48,7 @@ static Integer [] root_consonances = {0, 3, 4, 7};
 static int tempo_bpm = 90;
 static int piece_length = 2; //original was 2
 static int root_key = 0;
-static ModeModule my_mode_module = new AtonalNoRepeat();
+static ModeModule my_mode_module = new Cblues1();
 static String [] voice_array = {"bass", "bass", "bass"};  
 static RhythmModule james = new CommonTimeSuperStraightPatternGenerator();
 static boolean large_dissonance_bad = true;
@@ -157,8 +157,14 @@ public static void setModeModule (String this_mode_module) {
 //        if (this_mode_module.contains("Atonal (repeat pitch prefer)")) {
 //        my_mode_module = new AtonalRepeatPrefer();
 //    }
-        if (this_mode_module.contains("Blues")) {
+    if (this_mode_module.contains("Blues")) {
         my_mode_module = new Cblues1();
+    }
+    if (this_mode_module.contains("Major")) {
+        my_mode_module = new CMajor();
+    }
+    if (this_mode_module.contains("Minor")) {
+        my_mode_module = new CMinor();
     }
 }
 public static void setPieceLength(int my_piece_length) {
